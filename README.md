@@ -1,4 +1,4 @@
-IdaRef
+CutterRef
 ======
 Cutter Full Instruction Reference Plugin.
 
