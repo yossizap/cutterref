@@ -1,43 +1,18 @@
 IdaRef
 ======
-IDA Pro Full Instruction Reference Plugin - It's like auto-comments but useful.
+Cutter Full Instruction Reference Plugin.
 
-I'm generally pretty good at figuring out what various Intel instructions do.
-But, once in a while I need to either know some precise detail (i.e. exact 
-side effects of SUB) or come across a rare instruction. Then I break my train
-of thought and have to dig out the reference manual. Which got me thinking: 
-<i>Why can't IDA just give me the full documentation?</i>
+Ported from the excellent [IdaRef plugin by nologic](https://github.com/nologic/idaref).
 
-Enter IdaRef:
-![](./screenshot/idaref.png)
-The plugin will monitor the location for your cursor (ScreenEA) and display the full
+![](./screenshot/cutterref.png)
+The plugin will monitor the location for your cursor and display the full
 documentation of the instruction. At the moment it only supports x86-64, ARM and MIPS 32bit, 
 however adding support for other architectures is relatively easy.
 
 Usage
 -----
-Simply checkout or download the repository and install it to your IDA plugins directory:
+Simply checkout or download the repository and install it to your cutter plugins directory:
 
-    idaref.py -> <ida_path>/plugins/idaref.py
-    arm.sql -> <ida_path>/plugins/archs/arm.sql
-    x86-64.sql -> <ida_path>/plugins/archs/x86-64.sql
-    mips32.sql -> <ida_path>/plugins/archs/mips32.sql
-    xtensa.sql -> <ida_path>/plugins/archs/xtensa.sql
-
-You can also use the installer.sh file but you'll need to open it and edit the IDA path 
-if you're not using Mac OS and IDA 6.8.
-
-![](./screenshot/idaref_start.png)
-
-Once loaded, the plugin can be turned ON by going to Edit/Start IdaRef menu option. To 
-control the output right-click on the tab window to get a menu:
-
-* Update View - Load documentation for currectly selected instruction.
-* Lookup Instruction - Manual load documentation, you'll be prompted for the instruction.
-* Toggle Auto-refresh - Turn on/off auto loading of documentation and rely on the first two options.
-
-![](./screenshot/idaref_menu.png)
-    
 Internals
 ---------
 Upon loading the script will look for SQlite databases in the same directory as the 
@@ -71,12 +46,6 @@ The documentation database was created using a rather hackish screen scraping
 technique by the x86doc project which I forked. So, there are probably some 
 strange characters or tags in the text. At least, it is a mechanical process
 so I expect that the information is correct relative to the original Intel PDF.
-
-Ports
------
-If you're a hopper user, there is a port called hopperref: https://github.com/zbuc/hopperref
-
-If you're an x64dbg user, IdaRef is integrated with the `mnemonichelp xxx` command or through the context menu. Fork: https://github.com/x64dbg/idaref
 
 Enjoy!
 ------
