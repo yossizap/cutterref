@@ -4,14 +4,14 @@ Cutter Full Instruction Reference Plugin.
 
 Ported from the excellent [IdaRef plugin by nologic](https://github.com/nologic/idaref).
 
-![](./screenshot/cutterref.png)
+![](./screenshots/cutterref.png)
 The plugin will monitor the location for your cursor and display the full
 documentation of the instruction. At the moment it only supports x86-64, ARM and MIPS 32bit, 
 however adding support for other architectures is relatively easy.
 
 Usage
 -----
-Simply checkout or download the repository and install it to your cutter plugins directory:
+Simply checkout or download the repository and copy `cutterref.py` and `archs` to your cutter plugins directory ([locating the plugins directory](https://github.com/radareorg/cutter/blob/master/docs/source/plugins.rst#loading-and-overview)).
 
 Internals
 ---------
