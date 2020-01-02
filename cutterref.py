@@ -57,7 +57,8 @@ class CutterRef():
                 inst = "CMOVcc"
             elif(inst[0:3] == "SET"):
                 inst = "SETcc"
-            return inst
+
+        return inst
 
     def find_manuals(self):
         search_path = os.path.join(self.base_path, "archs", "*.sql")
