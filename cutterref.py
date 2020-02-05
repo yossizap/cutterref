@@ -39,7 +39,7 @@ class CutterRef():
             doc += "</pre>"
             return doc
         else:
-            return inst + " not documented."
+            return None
 
     def clean_instruction(self, inst):
         if(inst and self.arch == "x86-64"):
@@ -138,7 +138,7 @@ class CutterRefWidget(cutter.CutterDockWidget):
         QObject.connect(cutter.core(), SIGNAL("seekChanged(RVA)"), self.update_content)
 
     def update_content(self):
-        current_line = cutter.cmdj("pdj 1")
+        current_line = cutter.cmdj("pdj 1")[0]
 
         # Running "ij" during DockWidget init causes a crash
         if not self.cutterref:
@@ -147,14 +147,20 @@ class CutterRefWidget(cutter.CutterDockWidget):
             self.cutterref = CutterRef(info["arch"] + "-" + str(info["bits"]))
 
         try:
-            inst = current_line[0]["disasm"].split()[0]
+            inst = current_line["disasm"].split()[0]
         except:
             return
 
         # Don't update the text box for the same instruction
         if inst != self.previous_inst:
-            self.view.setHtml(self.cutterref.get_instruction_doc(inst))
+            doc = self.cutterref.get_instruction_doc(inst)
+            # Use r2's documentation if the instruction wasn't found in the loaded manual
+            if not doc:
+                doc = cutter.cmd("aod @ " + str(current_line["offset"]))
+
+            self.view.setHtml(doc)
             self.previous_inst = inst
+
         return
 
 class CutterRefPlugin(cutter.CutterPlugin):
